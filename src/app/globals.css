@@ -1,26 +1,93 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #ffbb00;
+  --primary-hover: #e6a800;
+  --text-primary: #171717;
+  --text-secondary: #6b7280;
+  --background: #f9fafb;
+  --card-bg: #ffffff;
+  --border: #e5e7eb;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --primary: #ffbb00;
+  --primary-hover: #ffd966;
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --background: #111827;
+  --card-bg: #1f2937;
+  --border: #374151;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer components {
+  
+  .btn-primary {
+    @apply bg-yellow-500 hover:bg-yellow-600 text-black font-medium py-1.5 sm:py-2 px-3 sm:px-4 rounded-lg transition-colors text-sm sm:text-base;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border border-[--border] hover:bg-gray-100 dark:hover:bg-gray-800 font-medium py-1.5 sm:py-2 px-3 sm:px-4 rounded-lg transition-colors text-sm sm:text-base;
+  }
+
+  .btn-danger {
+    @apply bg-red-500 hover:bg-red-600 text-white font-medium py-1.5 sm:py-2 px-3 sm:px-4 rounded-lg transition-colors text-sm sm:text-base;
+  }
+
+  .card {
+    @apply bg-[--card-bg] rounded-xl shadow-sm border border-[--border] p-4 sm:p-6;
+  }
+
+  .input {
+    @apply w-full p-2.5 bg-white dark:bg-gray-800 border border-[--border] rounded-lg focus:ring-2 focus:ring-[--primary] focus:border-transparent outline-none transition-all text-sm sm:text-base;
+  }
+
+  .tab {
+    @apply px-3 sm:px-4 py-2 font-medium transition-colors text-sm sm:text-base whitespace-nowrap;
+  }
+
+  .tab-active {
+    @apply text-[--primary] border-b-2 border-[--primary];
+  }
+
+  .tab-inactive {
+    @apply text-[--text-secondary] hover:text-[--text-primary];
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    @apply bg-[--background] text-[--text-primary] antialiased;
+  }
+  
+  h1 {
+    @apply text-xl sm:text-2xl font-bold;
+  }
+  
+  h2 {
+    @apply text-lg sm:text-xl font-semibold;
+  }
+  
+  h3 {
+    @apply text-base sm:text-lg font-medium;
+  }
+}
+
+/* Mobile optimized scrollbars */
+@media (max-width: 640px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+  }
 }
